@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Tesseract from 'tesseract.js';
-import { Camera, CameraSwitch } from 'react-camera-pro';
+import { Camera } from 'react-camera-pro';
 
 const WebcamCapture = () => {
   const [nik, setNIK] = useState('');
@@ -10,8 +10,9 @@ const WebcamCapture = () => {
   const [dob, setDob] = useState('');
   const [gender, setGender] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [imageSrc, setImageSrc] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [cameraFacing, setCameraFacing] = useState('user'); // Default to user-facing camera
 
   useEffect(() => {
     // Check if the device is mobile
@@ -23,8 +24,6 @@ const WebcamCapture = () => {
     setLoading(true);
 
     try {
-      // Simulate getting the image src from the camera
-      // In react-camera-pro, you would typically use the `ref` to get the image
       if (imageSrc) {
         const { data: { text } } = await Tesseract.recognize(imageSrc, 'ind');
         parseText(text);
@@ -48,11 +47,16 @@ const WebcamCapture = () => {
     if (genderMatch) setGender(genderMatch[1]);
   };
 
+  const toggleCamera = () => {
+    setCameraFacing((prevFacing) => (prevFacing === 'user' ? 'environment' : 'user'));
+  };
+
   if (isMobile) {
     return (
       <div style={{ textAlign: 'center' }}>
         <div style={{ position: 'relative', width: '100%', height: 'auto', margin: 'auto' }}>
           <Camera
+            facingMode={cameraFacing} // Control camera facing mode
             onCapture={(src) => setImageSrc(src)}
             style={{ width: '100%', height: 'auto' }}
           />
@@ -79,9 +83,9 @@ const WebcamCapture = () => {
           </div>
           <button type="submit">Register</button>
         </form>
-        <div>
-          <CameraSwitch />
-        </div>
+        <button onClick={toggleCamera}>
+          Switch Camera
+        </button>
       </div>
     );
   } else {
