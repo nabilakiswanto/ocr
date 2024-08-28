@@ -76,7 +76,7 @@ const WebcamCapture = () => {
   if (isMobile) {
     return (
       <div style={{ textAlign: 'center' }}>
-        <div style={{ position: 'relative', width: '100%', height: 'auto', maxWidth: '600px', maxHeight: '200px', margin: 'auto' }}>
+        <div style={{ position: 'relative', width: '100%', height: 'auto', margin: 'auto' }}>
           <Webcam
             audio={false}
             ref={webcamRef}
