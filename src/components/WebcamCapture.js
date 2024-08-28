@@ -36,18 +36,32 @@ const WebcamCapture = () => {
     getDevices();
   }, []);
 
+  // const handleCapture = async () => {
+  //   setLoading(true);
+  //   const imageSrc = webcamRef.current.getScreenshot();
+
+  //   try {
+  //     const { data: { text } } = await Tesseract.recognize(imageSrc, 'eng');
+  //     parseText(text);
+  //   } catch (err) {
+  //     console.error("Error during OCR processing.", err);
+  //   }
+  //   setLoading(false);
+  // };
   const handleCapture = async () => {
     setLoading(true);
     const imageSrc = webcamRef.current.getScreenshot();
-
+  
     try {
       const { data: { text } } = await Tesseract.recognize(imageSrc, 'eng');
+      console.log(text); 
       parseText(text);
     } catch (err) {
       console.error("Error during OCR processing.", err);
     }
     setLoading(false);
   };
+  
 
   const parseText = (text) => {
     const nikMatch= text.match(/NIK:\s*(.*)/i);
@@ -101,6 +115,11 @@ const WebcamCapture = () => {
         <label>Switch Camera:</label>
         <select onChange={handleDeviceChange} value={selectedDeviceId || ''}>
           <option value="" disabled>Select a camera</option>
+          {/* {devices.map((device) => (
+            <option key={device.deviceId} value={device.deviceId}>
+              {device.label || `Camera ${device.deviceId}`}
+            </option>
+          ))} */}
           {devices.map((device) => (
             <option key={device.deviceId} value={device.deviceId}>
               {device.label || `Camera ${device.deviceId}`}
