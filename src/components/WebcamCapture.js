@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import Tesseract from 'tesseract.js';
-import Webcam from 'react-webcam';
 import { CameraSwitch } from 'react-camera-pro'; // Import react-camera-pro
 
 const WebcamCapture = () => {
@@ -50,7 +49,7 @@ const WebcamCapture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
 
     try {
-      const { data: { text } } = await Tesseract.recognize(imageSrc, 'eng');
+      const { data: { text } } = await Tesseract.recognize(imageSrc, 'ind');
       parseText(text);
     } catch (err) {
       console.error("Error during OCR processing.", err);
