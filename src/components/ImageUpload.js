@@ -36,7 +36,7 @@ const ImageUpload = () => {
   const parseText = (text) => {
     const nikMatch = text.match(/NIK\s*[^\d]*(\d+)/i);
     const nameMatch = text.match(/Nama\s*:\s*(.*)/i);
-    const dobMatch = text.match(/Tempat\/Tgl Lahir\s*:\s*(.*)/i);
+    const dobMatch = text.match(/Tempat\s*:\s*(.*)/i);
     const genderMatch = text.match(/Jenis Kelamin\s*:\s*(.*)/i);
     console.log("NIK:", nikMatch ? nikMatch[1].trim() : "Not Found");
     console.log("Nama:", nameMatch ? nameMatch[1].trim() : "Not Found");
