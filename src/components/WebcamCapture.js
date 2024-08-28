@@ -86,7 +86,7 @@ const WebcamCapture = () => {
             videoConstraints={{ deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined }}
           />
         </div>
-        <button onClick={handleCapture} disabled={loading}>
+        <button onClick={handleCapture} disabled={loading} class="mt-5">
           {loading ? 'Processing...' : 'Capture & Process'}
         </button>
         <form>
