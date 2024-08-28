@@ -73,10 +73,10 @@ const WebcamCapture = () => {
   };  
 
   const parseText = (text) => {
-    const nikMatch = text.match(/NIK:\s*(.*)/i);
-    const nameMatch = text.match(/Nama:\s*(.*)/i);
-    const dobMatch = text.match(/Tempat\/Tgl Lahir:\s*(.*)/i);
-    const genderMatch = text.match(/Jenis Kelamin:\s*(.*)/i);
+    const nikMatch = text.match(/NIK\s*(.*)/i);
+    const nameMatch = text.match(/Nama\s*(.*)/i);
+    const dobMatch = text.match(/Tempat\/Tgl Lahir\s*(.*)/i);
+    const genderMatch = text.match(/Jenis Kelamin\s*(.*)/i);
 
     if (nikMatch) setNIK(nikMatch[1].trim());
     if (nameMatch) setName(nameMatch[1].trim());
