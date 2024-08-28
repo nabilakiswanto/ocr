@@ -2,7 +2,8 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import Tesseract from 'tesseract.js';
-import { CameraSwitch } from 'react-camera-pro'; 
+import Webcam from 'react-webcam';
+
 const WebcamCapture = () => {
   const [nik, setNIK] = useState('');
   const [name, setName] = useState('');
@@ -76,7 +77,8 @@ const WebcamCapture = () => {
     return (
       <div style={{ textAlign: 'center' }}>
         <div style={{ position: 'relative', width: '100%', height: 'auto', maxWidth: '600px', maxHeight: '400px', margin: 'auto' }}>
-          <CameraSwitch
+          <Webcam
+            audio={false}
             ref={webcamRef}
             screenshotFormat="image/jpeg"
             width="100%"
