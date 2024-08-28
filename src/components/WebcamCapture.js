@@ -19,10 +19,10 @@ const WebcamCapture = () => {
         const videoDevices = deviceInfos.filter(deviceInfo => deviceInfo.kind === 'videoinput');
         setDevices(videoDevices);
 
-        // Set default device (usually the first one in the list)
-        if (videoDevices.length > 0) {
-          setSelectedDeviceId(videoDevices[0].deviceId);
-        }
+        // Set default device (usually the rear camera on mobile devices if available)
+        const rearCamera = videoDevices.find(device => device.label.toLowerCase().includes('back')) ||
+                           videoDevices[0]; // Fallback to the first camera if no rear camera is found
+        setSelectedDeviceId(rearCamera.deviceId);
       })
       .catch((err) => {
         console.error("Error accessing media devices.", err);
