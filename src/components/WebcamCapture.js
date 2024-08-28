@@ -21,6 +21,7 @@ const WebcamCapture = () => {
 
         // Set default device (usually the rear camera on mobile devices if available)
         const rearCamera = videoDevices.find(device => device.label.toLowerCase().includes('back')) ||
+                           videoDevices.find(device => device.label.toLowerCase().includes('rear')) ||
                            videoDevices[0]; // Fallback to the first camera if no rear camera is found
         setSelectedDeviceId(rearCamera.deviceId);
       })

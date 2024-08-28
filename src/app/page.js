@@ -4,7 +4,7 @@ import WebcamCapture from '../components/WebcamCapture';
 const HomePage = () => {
   return (
     <div>
-      <h1>Event Registration</h1>
+      <h1>Registration</h1>
       <WebcamCapture />
     </div>
   );
