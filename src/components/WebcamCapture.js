@@ -61,7 +61,7 @@ const WebcamCapture = () => {
         // e.g., convert to grayscale or adjust brightness/contrast
   
         try {
-          const { data: { text } } = await Tesseract.recognize(img, 'eng', {
+          const { data: { text } } = await Tesseract.recognize(img, 'ind', {
             logger: info => console.log(info) // Log progress
           });
           parseText(text);
