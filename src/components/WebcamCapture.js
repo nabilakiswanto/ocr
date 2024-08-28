@@ -49,8 +49,9 @@ const WebcamCapture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
 
     try {
-      const { data: { text } } = await Tesseract.recognize(imageSrc, 'eng');
+      const { data: { text } } = await Tesseract.recognize(imageSrc, 'ind');
       parseText(text);
+      console.log("text",parseText(text))
     } catch (err) {
       console.error("Error during OCR processing.", err);
     }
@@ -73,20 +74,20 @@ const WebcamCapture = () => {
     setSelectedDeviceId(event.target.value);
   };
 
-  if (isMobile) {
+  // if (isMobile) {
     return (
       <div style={{ textAlign: 'center' }}>
         <div style={{ position: 'relative', width: '100%', height: 'auto', margin: 'auto' }}>
-          <Webcam
-            audio={false}
-            ref={webcamRef}
-            screenshotFormat="image/jpeg"
-            width="100%"
-            height="100%"
-            videoConstraints={{ deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined }}
-          />
+        <Webcam
+          audio={false}
+          ref={webcamRef}
+          screenshotFormat="image/jpeg"
+          width="100%"
+          height="100%"
+          videoConstraints={{ deviceId: selectedDeviceId ? { exact: selectedDeviceId } : undefined }}
+        />
         </div>
-        <button onClick={handleCapture} disabled={loading} class="mt-5">
+        <button onClick={handleCapture} disabled={loading}>
           {loading ? 'Processing...' : 'Capture & Process'}
         </button>
         <form>
@@ -121,13 +122,13 @@ const WebcamCapture = () => {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div style={{ textAlign: 'center' }}>
-        <p>This application is best viewed on a mobile device. Please use a mobile phone for optimal functionality.</p>
-      </div>
-    );
-  }
+  // } else {
+  //   return (
+  //     <div style={{ textAlign: 'center' }}>
+  //       <p>This application is best viewed on a mobile device. Please use a mobile phone for optimal functionality.</p>
+  //     </div>
+  //   );
+  // }
 };
 
 export default WebcamCapture;
