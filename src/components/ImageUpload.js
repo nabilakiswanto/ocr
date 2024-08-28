@@ -22,6 +22,7 @@ const ImageUpload = () => {
         const { data: { text } } = await Tesseract.recognize(file, 'ind', {
           logger: info => console.log(info) // Log progress
         });
+        // console.log("Extracted Text:", text);
         parseText(text);
       } catch (err) {
         setError('Error during OCR processing.');
@@ -33,15 +34,19 @@ const ImageUpload = () => {
   };
 
   const parseText = (text) => {
-    const nikMatch = text.match(/NIK\s*(.*)/i);
-    const nameMatch = text.match(/Nama\s*(.*)/i);
-    const dobMatch = text.match(/Tempat\/Tgl Lahir\s*(.*)/i);
-    const genderMatch = text.match(/Jenis Kelamin\s*(.*)/i);
+    const nikMatch = text.match(/NIK\s*[^\d]*(\d+)/i);
+    const nameMatch = text.match(/Nama\s*:\s*(.*)/i);
+    const dobMatch = text.match(/Tempat\/Tgl Lahir\s*:\s*(.*)/i);
+    const genderMatch = text.match(/Jenis Kelamin\s*:\s*(.*)/i);
+    console.log("NIK:", nikMatch ? nikMatch[1].trim() : "Not Found");
+    console.log("Nama:", nameMatch ? nameMatch[1].trim() : "Not Found");
+    console.log("TTL:", dobMatch ? dobMatch[1].trim() : "Not Found");
+    console.log("Jenis Kelamin:", genderMatch ? genderMatch[1].trim() : "Not Found");
 
     if (nikMatch) setNIK(nikMatch[1].trim());
     if (nameMatch) setName(nameMatch[1].trim());
-    if (dobMatch) setDob(dobMatch[1].trim());
-    if (genderMatch) setGender(genderMatch[1].trim());
+    if (dobMatch) setDob(dobMatch[1].split('-')[0].trim());
+    if (genderMatch) setGender(genderMatch[1].split(' ')[0].trim());
   };
 
   return (
