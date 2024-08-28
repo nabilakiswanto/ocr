@@ -22,12 +22,13 @@ const WebcamCapture = () => {
 
   const handleCapture = async () => {
     setLoading(true);
-
     try {
       if (imageSrc) {
         const { data: { text } } = await Tesseract.recognize(imageSrc, 'ind');
         parseText(text);
-        console.log("text", text);
+        console.log("Text:", text);
+      } else {
+        console.error("No image source available for capture.");
       }
     } catch (err) {
       console.error("Error during OCR processing.", err);
@@ -51,7 +52,7 @@ const WebcamCapture = () => {
     setCameraFacing((prevFacing) => (prevFacing === 'user' ? 'environment' : 'user'));
   };
 
-  if (isMobile) {
+  // if (isMobile) {
     return (
       <div style={{ textAlign: 'center' }}>
         <div style={{ position: 'relative', width: '100%', height: 'auto', margin: 'auto' }}>
@@ -88,13 +89,13 @@ const WebcamCapture = () => {
         </button>
       </div>
     );
-  } else {
-    return (
-      <div style={{ textAlign: 'center' }}>
-        <p>This application is best viewed on a mobile device. Please use a mobile phone for optimal functionality.</p>
-      </div>
-    );
-  }
+  // } else {
+  //   return (
+  //     <div style={{ textAlign: 'center' }}>
+  //       <p>This application is best viewed on a mobile device. Please use a mobile phone for optimal functionality.</p>
+  //     </div>
+  //   );
+  // }
 };
 
 export default WebcamCapture;
