@@ -1,0 +1,14 @@
+.cameraContainer {
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    height: auto;
+    max-height: 400px; /* Adjust as needed */
+    margin: auto;
+  }
+  
+  .camera {
+    width: 100%;
+    height: 100%;
+  }
+  
